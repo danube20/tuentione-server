@@ -53,7 +53,7 @@ router.put(`/:eachUser_id/addFriend`, isAuthenticated, (req, res) => {
         .catch(err => res.status(400).json(err))
 })
 
-router.put(`/:eachUser_id/addFriend`, isAuthenticated, (req, res) => {
+router.put(`/:eachUser_id/delFriend`, isAuthenticated, (req, res) => {
     const { eachUser_id } = req.params
     const { _id } = req.payload
     const promises = []
