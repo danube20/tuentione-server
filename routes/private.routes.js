@@ -1,7 +1,6 @@
 const { isAuthenticated } = require('../middlewares/jwt.middleware')
 const Private = require('../models/Private.model')
 const User = require('../models/User.model')
-
 const router = require('express').Router()
 
 router.get('/', (req, res) => {

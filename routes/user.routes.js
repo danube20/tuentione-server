@@ -43,10 +43,8 @@ router.put(`/:eachUser_id/addFriend`, isAuthenticated, (req, res) => {
     const { _id } = req.payload
     const promises = []
 
-    promises.push(User
-        .findByIdAndUpdate(_id, { $push: { friends: eachUser_id } }))
-    promises.push(User
-        .findByIdAndUpdate(eachUser_id, { $push: { friends: _id } }))
+    promises.push(User.findByIdAndUpdate(_id, { $push: { friends: eachUser_id } }))
+    promises.push(User.findByIdAndUpdate(eachUser_id, { $push: { friends: _id } }))
 
     Promise.all(promises)
         .then(data => res.json(data))
@@ -58,10 +56,8 @@ router.put(`/:eachUser_id/delFriend`, isAuthenticated, (req, res) => {
     const { _id } = req.payload
     const promises = []
 
-    promises.push(User
-        .findByIdAndUpdate(_id, { $pull: { friends: eachUser_id } }))
-    promises.push(User
-        .findByIdAndUpdate(eachUser_id, { $pull: { friends: _id } }))
+    promises.push(User.findByIdAndUpdate(_id, { $pull: { friends: eachUser_id } }))
+    promises.push(User.findByIdAndUpdate(eachUser_id, { $pull: { friends: _id } }))
 
     Promise.all(promises)
         .then(data => res.json(data))

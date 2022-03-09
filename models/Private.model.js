@@ -32,6 +32,4 @@ const privateSchema = new Schema(
     }
 )
 
-const Post = model("Private", privateSchema);
-
-module.exports = Post;
+module.exports = model("Private", privateSchema)
