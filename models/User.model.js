@@ -29,18 +29,6 @@ const userSchema = new Schema(
       enum: ['USER', 'ADMIN'],
       default: 'USER'
     },
-    posts: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Post'
-    }],
-    privatePosts: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Private'
-    }],
-    friends: [{
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }],
     nameUser: {
       type: String,
       maxlength: 40,
@@ -58,7 +46,23 @@ const userSchema = new Schema(
     },
     birthday: {
       type: Date
-    }
+    },
+    posts: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }],
+    privatePosts: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Private'
+    }],
+    friends: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    conversations: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Conversation'
+    }]
   },
 
   {
