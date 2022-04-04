@@ -4,7 +4,7 @@ const { isAuthenticated } = require('../middlewares/jwt.middleware')
 
 const router = require('express').Router()
 
-router.post('/', isAuthenticated, async (req, res) => {
+router.post('/', isAuthenticated, (req, res) => {
 
     const newConversation = {
         members: [req.body.senderId, req.body.receiverId]
@@ -15,6 +15,12 @@ router.post('/', isAuthenticated, async (req, res) => {
             res.status(200).json(data)
             return User.findByIdAndUpdate(req.payload._id, { $push: { conversations: data._id } })
         })
+        .catch(err => res.status(400).json(err))
+})
+
+router.delete('/cnv/:convId', (req, res) => {
+    Conversation
+        .findByIdAndDelete(req.params.convId)
         .catch(err => res.status(400).json(err))
 })
 
