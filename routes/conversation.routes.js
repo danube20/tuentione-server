@@ -13,7 +13,9 @@ router.post('/', isAuthenticated, (req, res) => {
         .create(newConversation)
         .then(data => {
             res.status(200).json(data)
-            return User.findByIdAndUpdate(req.payload._id, { $push: { conversations: data._id } })
+            return User
+                .findByIdAndUpdate(req.payload._id, { $push: { conversations: data._id } })
+                .then(() => User.findByIdAndUpdate(req.body.receiverId, { $push: { conversations: data._id } }))
         })
         .catch(err => res.status(400).json(err))
 })
@@ -33,6 +35,17 @@ router.get('/:userId', async (req, res) => {
     } catch (error) {
         res.status(500).json(error)
     }
+})
+
+router.put('/cnv/update/:friendId/:convId', isAuthenticated, (req, res) => { // Delete conversation id from conversation's array
+
+    const { friendId, convId } = req.params
+
+    User
+        .findByIdAndUpdate(friendId, { $pull: { conversations: convId } })
+        .then(() => User.findByIdAndUpdate(req.payload._id, { $pull: { conversations: convId } }))
+        .then(() => res.status(200))
+        .catch(err => res.status(400).json(err))
 })
 
 module.exports = router
