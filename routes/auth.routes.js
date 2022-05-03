@@ -45,7 +45,6 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const { email, password } = req.body
 
-
     if (email === '' || password === '') {
         res.status(400).json({ message: 'Introduce un correo y contraseña.' })
         return
